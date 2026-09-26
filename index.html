@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-Week SE Intern Fast-Track</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #2563EB; /* Deep Blue for SE Focus */
+            --primary-dark: #1E3A8A;
+            --secondary: #10B981; /* Success Green */
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --accent: #F59E0B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 80px; 
+        }
+
+        /* Fixed Header & Progress Bar */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E2E8F0;
+            z-index: 1030;
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .course-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 0;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-wrapper {
+            min-width: 250px;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .progress {
+            height: 10px;
+            background-color: #E2E8F0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Navigation Tabs */
+        .nav-pills {
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            gap: 8px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+        
+        .nav-pills::-webkit-scrollbar { display: none; }
+
+        .nav-pills .nav-link {
+            color: var(--text-muted);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.2s;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Timeline Cards */
+        .study-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid #E2E8F0;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .study-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+            border-color: #CBD5E1;
+        }
+
+        /* Checkbox Task Styling */
+        .task-checkbox-wrapper {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            background: #F1F5F9;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .task-checkbox-wrapper:hover { background: #E2E8F0; }
+        .task-checkbox-wrapper.completed { background: #D1FAE5; color: #065F46; border: 1px solid #34D399; }
+        
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        input[type="checkbox"] { display: none; }
+        input[type="checkbox"]:checked + .custom-checkbox {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        input[type="checkbox"]:checked + .custom-checkbox::after {
+            content: '\F26A'; /* Bootstrap Icon Check */
+            font-family: 'bootstrap-icons';
+            color: white;
+            font-size: 14px;
+        }
+        .check-text { font-weight: 600; font-size: 0.85rem; }
+
+        /* Typography & Blocks */
+        .time-badge {
+            background-color: #EFF6FF;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+
+        .info-block {
+            background: #F8FAFC;
+            border-left: 4px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            color: white;
+            border: none;
+        }
+        .video-card .card-title { color: white; }
+        .video-card .info-block { background: rgba(255,255,255,0.05); border-left-color: #EF4444; color: #CBD5E1;}
+        .video-card .task-checkbox-wrapper {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .video-card .task-checkbox-wrapper:hover { background: rgba(255,255,255,0.2); }
+
+        .yt-link {
+            color: #EF4444;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .yt-link:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #DC2626;
+        }
+
+        /* Utilities */
+        .day-header { font-weight: 800; color: var(--text-main); margin: 2rem 0 1rem; }
+        .day-target { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; }
+        
+        .market-stat {
+            background: #F1F5F9;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }
+
+        @media (max-width: 768px) {
+            .task-checkbox-wrapper {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-top: 15px;
+                display: inline-flex;
+            }
+            .header-container { flex-direction: column; align-items: stretch; }
+            body { padding-top: 120px; }
+            .card-title { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Header with Global Progress -->
+    <header class="fixed-header">
+        <div class="container header-container">
+            <h1 class="course-title">
+                <i class="bi bi-briefcase-fill text-primary"></i> 
+                7-Week SE Fast-Track
+            </h1>
+            
+            <div class="progress-wrapper">
+                <div class="progress-labels">
+                    <span>Mastery Progress</span>
+                    <span id="progressText">0% (0 Tasks)</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+        
+        <!-- Welcome Message -->
+        <div class="alert alert-info border-0 bg-white shadow-sm mt-4 mb-4 rounded-4 p-4 d-flex gap-3 align-items-start">
+            <i class="bi bi-bar-chart-line-fill fs-3 text-primary"></i>
+            <div>
+                <h5 class="fw-bold mb-2">Sri Lankan SE Intern Market Analysis (Sept 2026)</h5>
+                <p class="mb-3 text-muted">Based on an analysis of 67 recent job descriptions, here is the factual breakdown of the most in-demand technologies. Attempting to learn Laravel, C#, and React Native simultaneously is a critical mistake. <strong>Focus entirely on the PERN Stack.</strong></p>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="market-stat text-center">
+                            <h3 class="fw-bold text-primary mb-0">28</h3>
+                            <div class="small fw-bold text-muted text-uppercase">Git/GitHub</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="market-stat text-center">
+                            <h3 class="fw-bold text-primary mb-0">42</h3>
+                            <div class="small fw-bold text-muted text-uppercase">React / Next.js</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="market-stat text-center">
+                            <h3 class="fw-bold text-primary mb-0">15</h3>
+                            <div class="small fw-bold text-muted text-uppercase">Node.js</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="market-stat text-center">
+                            <h3 class="fw-bold text-primary mb-0">12</h3>
+                            <div class="small fw-bold text-muted text-uppercase">PostgreSQL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Course Overview -->
+        <div class="alert alert-warning border-0 bg-white shadow-sm mb-4 rounded-4 p-4">
+            <h5 class="fw-bold text-dark"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i> Reality Check: The Solo Portfolio Gap</h5>
+            <p class="mb-0 text-muted">Employers can often tell when projects like LankaLawBot or GlobalBooks were group assignments where you handled one slice (like UI design). You need a <strong>Solo Full-Stack Proof of Competence</strong> proving you can wire a database (PostgreSQL) to a backend (Node.js) to a frontend (Next.js) entirely on your own. This perfectly aligns with the highest local job market demand and bridges your current UI/UX skills into full-stack engineering.</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#phase1" type="button">Phase 1 (W1-2): Core</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#phase2" type="button">Phase 2 (W3-4): Next.js</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#phase3" type="button">Phase 3 (W5-6): Project</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#phase4" type="button">Phase 4 (W7): Deploy</button>
+            </li>
+        </ul>
+
+        <div class="alert alert-secondary border-0 mb-4 bg-light rounded-3 px-3 py-2 text-center text-muted small fw-bold">
+            <i class="bi bi-calendar-event me-1"></i> Routine: Wed-Sun Deep Work (6-8 hrs). Mon-Tue Light Work (2 hrs).
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="pills-tabContent">
+
+            <!-- ================= PHASE 1 ================= -->
+            <div class="tab-pane fade show active" id="phase1">
+                <h2 class="day-header">Phase 1: The Core Foundation (Weeks 1-2)</h2>
+                <p class="day-target"><strong>Goal:</strong> Master React fundamentals and backend API creation with Node.js.</p>
+
+                <!-- Week 1 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 1 (Wed-Sun)</span>
+                    <h3 class="card-title">Frontend Foundation: React Crash Course</h3>
+                    <div class="info-block">
+                        Build two small apps: a dynamic to-do list and a weather app fetching data from a public API.
+                    </div>
+                    
+                    <div class="video-card p-3 rounded-3 mt-3">
+                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>React JS Full Course | Build an App and Master React in 1 Hour</h4>
+                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                        <p class="small mb-2">Covers modern React fundamentals, functional components, hooks (useState, useEffect), and props. Perfect for building your first dynamic UI and transitioning your UI/UX skills into code.</p>
+                        <a href="https://www.youtube.com/watch?v=bMknfKXIFA8" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    </div>
+                </div>
+
+                <!-- Week 2 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 2 (Wed-Sun)</span>
+                    <h3 class="card-title">Backend Architecture: Node.js, Express & PostgreSQL</h3>
+                    <div class="info-block">
+                        Set up a local PostgreSQL database. Write simple CRUD (Create, Read, Update, Delete) REST APIs using Express and query PostgreSQL using standard SQL.
+                    </div>
+                    
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <div class="video-card p-3 rounded-3 h-100">
+                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Node.js and Express.js - Full Course</h4>
+                                <p class="small text-muted mb-2"><strong>Channel:</strong> freeCodeCamp.org</p>
+                                <p class="small mb-2">A comprehensive guide. Focus on the Express.js sections to learn how to build REST APIs, configure routing, and handle HTTP requests.</p>
+                                <a href="https://www.youtube.com/watch?v=Oe421EPjeBE" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="video-card p-3 rounded-3 h-100">
+                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>PostgreSQL Crash Course</h4>
+                                <p class="small text-muted mb-2"><strong>Channel:</strong> Traversy Media</p>
+                                <p class="small mb-2">Teaches relational database concepts, schema creation, and basic SQL queries. This provides the database knowledge needed to back up your resume.</p>
+                                <a href="https://www.youtube.com/watch?v=qw--VmL3QHI" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PHASE 2 ================= -->
+            <div class="tab-pane fade" id="phase2">
+                <h2 class="day-header">Phase 2: Next.js & Full-Stack Integration (Weeks 3-4)</h2>
+                <p class="day-target"><strong>Goal:</strong> Transition from basic React to Next.js (market heavily demands this) and connect your backend.</p>
+
+                <!-- Week 3 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 3 (Wed-Sun)</span>
+                    <h3 class="card-title">Enterprise Frontend: Next.js App Router</h3>
+                    <div class="info-block">
+                        Understand server-side rendering vs. client components. Next.js is the exact enterprise framework demanded by Sri Lankan tech companies.
+                    </div>
+                    
+                    <div class="video-card p-3 rounded-3 mt-3">
+                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js 14 Full Course 2024 | Build and Deploy</h4>
+                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                        <p class="small mb-2">Introduces the modern Next.js App Router, Server Components, and client-side rendering. Bridges standard React into an enterprise framework.</p>
+                        <a href="https://www.youtube.com/watch?v=wm5gMKuwSYk" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    </div>
+                </div>
+
+                <!-- Week 4 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 4 (Wed-Sun)</span>
+                    <h3 class="card-title">Full-Stack Wiring: Prisma ORM & API Connections</h3>
+                    <div class="info-block">
+                        Connect a Next.js frontend to the Express/PostgreSQL APIs built in Week 2. Learn to manage state and handle API data fetching securely using Prisma ORM.
+                    </div>
+                    
+                    <div class="video-card p-3 rounded-3 mt-3">
+                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Learn Prisma In 60 Minutes</h4>
+                        <p class="small text-muted mb-2"><strong>Channel:</strong> Web Dev Simplified</p>
+                        <p class="small mb-2">Prisma is the industry-standard ORM for connecting Node.js or Next.js to PostgreSQL. This teaches you how to easily write database queries using JavaScript instead of raw SQL strings.</p>
+                        <a href="https://www.youtube.com/watch?v=RebA5J-rlwg" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PHASE 3 ================= -->
+            <div class="tab-pane fade" id="phase3">
+                <h2 class="day-header">Phase 3: The Solo Portfolio Project (Weeks 5-6)</h2>
+                <p class="day-target"><strong>Goal:</strong> Build your resume-defining project. A B2B SaaS Inventory & Order Management Dashboard.</p>
+
+                <!-- Weeks 5-6 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Weeks 5-6 (Deep Work)</span>
+                    <h3 class="card-title">Build: B2B SaaS Management Dashboard</h3>
+                    <div class="info-block">
+                        <strong>Why:</strong> It proves you can handle complex relational data (PostgreSQL), build beautiful dashboards (your UI/UX skills), and manage full-stack logic (Next.js/Node.js).<br><br>
+                        <strong>Features:</strong> User Authentication (JWT), Relational schema (Users, Products, Orders), Data tables & Charts fetching from Node.js backend.
+                    </div>
+                    
+                    <div class="video-card p-3 rounded-3 mt-3">
+                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Build and Deploy a React Admin Dashboard App With Theming, Tables, Charts</h4>
+                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                        <p class="small mb-2">Provides the exact UI blueprint for the B2B SaaS dashboard project. Follow this to build the frontend visuals, but <strong>connect it to your custom Express/PostgreSQL backend</strong> instead of using the tutorial's dummy data.</p>
+                        <a href="https://www.youtube.com/watch?v=jx5hdo50a2M" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= PHASE 4 ================= -->
+            <div class="tab-pane fade" id="phase4">
+                <h2 class="day-header">Phase 4: Polish, Deploy & Apply (Week 7)</h2>
+                <p class="day-target"><strong>Goal:</strong> Make it live (Nov 7 - Nov 14) and update the CV.</p>
+
+                <!-- Week 7 Task -->
+                <div class="study-card">
+                    <label class="task-checkbox-wrapper">
+                        <input type="checkbox" class="task-check">
+                        <div class="custom-checkbox"></div>
+                        <span class="check-text">Complete Task</span>
+                    </label>
+                    <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 7</span>
+                    <h3 class="card-title">Production Deployment (Vercel & Supabase)</h3>
+                    <div class="info-block">
+                        Deploy the PostgreSQL database to Supabase. Deploy the Next.js app to Vercel. <strong>CV Update:</strong> Remove older, less relevant projects and place this Solo Full-Stack Dashboard at the very top.
+                    </div>
+                    
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <div class="video-card p-3 rounded-3 h-100">
+                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Host a PostgreSQL Database for FREE with Supabase</h4>
+                                <p class="small text-muted mb-2"><strong>Channel:</strong> Code With Antonio</p>
+                                <p class="small mb-2">A quick guide on how to migrate your local PostgreSQL database to a free cloud host (Supabase) so your live application can persist data securely.</p>
+                                <a href="https://www.youtube.com/watch?v=7uKQBl9uZ00" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="video-card p-3 rounded-3 h-100">
+                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js Deployment to Vercel</h4>
+                                <p class="small text-muted mb-2"><strong>Channel:</strong> Vercel</p>
+                                <p class="small mb-2">The official, fastest way to deploy your Next.js frontend to a live, shareable URL. This gives you the final production link for your CV.</p>
+                                <a href="https://www.youtube.com/watch?v=2HBIzEx6IZA" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap & Logic Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.task-check');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const totalTasks = checkboxes.length;
+
+            // Load saved progress from LocalStorage
+            const savedProgress = JSON.parse(localStorage.getItem('internPlanProgress')) || {};
+
+            function updateProgressUI() {
+                let completed = 0;
+                checkboxes.forEach((cb, index) => {
+                    const wrapper = cb.closest('.task-checkbox-wrapper');
+                    if (cb.checked) {
+                        completed++;
+                        wrapper.classList.add('completed');
+                        wrapper.querySelector('.check-text').innerText = 'Done';
+                    } else {
+                        wrapper.classList.remove('completed');
+                        wrapper.querySelector('.check-text').innerText = 'Complete Task';
+                    }
+                });
+
+                const percentage = totalTasks === 0 ? 0 : Math.round((completed / totalTasks) * 100);
+                progressBar.style.width = percentage + '%';
+                progressText.innerText = `${percentage}% (${completed}/${totalTasks})`;
+            }
+
+            checkboxes.forEach((cb, index) => {
+                // Restore state
+                if (savedProgress[index]) {
+                    cb.checked = true;
+                }
+
+                // Add Event Listener
+                cb.addEventListener('change', () => {
+                    savedProgress[index] = cb.checked;
+                    localStorage.setItem('internPlanProgress', JSON.stringify(savedProgress));
+                    updateProgressUI();
+                });
+            });
+
+            // Initial UI Update
+            updateProgressUI();
+        });
+    </script>
+</body>
+</html>
