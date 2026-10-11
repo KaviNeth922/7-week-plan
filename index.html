@@ -224,14 +224,23 @@
             color: white;
             border: none;
         }
-        .video-card .card-title { color: white; }
+        
+        .video-card-alt {
+            background: linear-gradient(135deg, #1e3a8a, #172554); /* Deep Blue for alternative videos */
+            color: white;
+            border: none;
+        }
+
+        .video-card .card-title, .video-card-alt .card-title { color: white; }
         .video-card .info-block { background: rgba(255,255,255,0.05); border-left-color: #EF4444; color: #CBD5E1;}
-        .video-card .task-checkbox-wrapper {
+        .video-card-alt .info-block { background: rgba(255,255,255,0.05); border-left-color: #10B981; color: #E0E7FF;}
+        
+        .video-card .task-checkbox-wrapper, .video-card-alt .task-checkbox-wrapper {
             background: rgba(255,255,255,0.1);
             border-color: rgba(255,255,255,0.2);
             color: white;
         }
-        .video-card .task-checkbox-wrapper:hover { background: rgba(255,255,255,0.2); }
+        .video-card .task-checkbox-wrapper:hover, .video-card-alt .task-checkbox-wrapper:hover { background: rgba(255,255,255,0.2); }
 
         .yt-link {
             color: #EF4444;
@@ -249,6 +258,25 @@
         .yt-link:hover {
             background: rgba(239, 68, 68, 0.2);
             color: #DC2626;
+        }
+        
+        .yt-link-alt {
+            color: #34D399;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .yt-link-alt:hover {
+            background: rgba(16, 185, 129, 0.2);
+            color: #059669;
         }
 
         /* Utilities */
@@ -377,16 +405,31 @@
                         <span class="check-text">Complete Task</span>
                     </label>
                     <span class="time-badge"><i class="bi bi-calendar-week"></i> Week 1 (Wed-Sun)</span>
-                    <h3 class="card-title">Frontend Foundation: React Crash Course</h3>
+                    <h3 class="card-title">Frontend Foundation: React Fundamentals</h3>
                     <div class="info-block">
                         Build two small apps: a dynamic to-do list and a weather app fetching data from a public API.
                     </div>
                     
-                    <div class="video-card p-3 rounded-3 mt-3">
-                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>React JS Full Course | Build an App and Master React in 1 Hour</h4>
-                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
-                        <p class="small mb-2">Covers modern React fundamentals, functional components, hooks (useState, useEffect), and props. Perfect for building your first dynamic UI and transitioning your UI/UX skills into code.</p>
-                        <a href="https://www.youtube.com/watch?v=bMknfKXIFA8" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Original Fast Track Video -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Option 1: Fast Track Crash Course (1 Hour)</span>
+                        <div class="video-card p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>React JS Full Course | Build an App and Master React in 1 Hour</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                            <p class="small mb-2">Covers modern React fundamentals, functional components, hooks (useState, useEffect), and props. Perfect for building your first dynamic UI and transitioning your UI/UX skills into code.</p>
+                            <a href="https://www.youtube.com/watch?v=bMknfKXIFA8" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                        </div>
+                    </div>
+
+                    <!-- New Alternative Deep Dive Video -->
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="badge bg-success mb-2 px-3 py-2">Option 2: Deep Dive Masterclass (4.5 Hours)</span>
+                        <div class="video-card-alt p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>React Full Course for free ⚛️ (2024)</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> Bro Code</p>
+                            <p class="small mb-2"><strong>Duration:</strong> ~4.5 Hours<br>A highly engaging, easy-to-follow comprehensive course. It takes you step-by-step through modern React, functional components, and hooks at a comfortable pace rather than rushing through in an hour.</p>
+                            <a href="https://youtu.be/CgkZ7MvWUAA" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                        </div>
                     </div>
                 </div>
 
@@ -403,21 +446,48 @@
                         Set up a local PostgreSQL database. Write simple CRUD (Create, Read, Update, Delete) REST APIs using Express and query PostgreSQL using standard SQL.
                     </div>
                     
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-6">
-                            <div class="video-card p-3 rounded-3 h-100">
-                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Node.js and Express.js - Full Course</h4>
-                                <p class="small text-muted mb-2"><strong>Channel:</strong> freeCodeCamp.org</p>
-                                <p class="small mb-2">A comprehensive guide. Focus on the Express.js sections to learn how to build REST APIs, configure routing, and handle HTTP requests.</p>
-                                <a href="https://www.youtube.com/watch?v=Oe421EPjeBE" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Original Fast Track Videos -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Option 1: Fast Track Crash Courses</span>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="video-card p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Node.js and Express.js - Full Course</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> freeCodeCamp.org</p>
+                                    <p class="small mb-2">A comprehensive guide. Focus on the Express.js sections to learn how to build REST APIs, configure routing, and handle HTTP requests.</p>
+                                    <a href="https://www.youtube.com/watch?v=Oe421EPjeBE" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="video-card p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>PostgreSQL Crash Course</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> Traversy Media</p>
+                                    <p class="small mb-2">Teaches relational database concepts, schema creation, and basic SQL queries. This provides the database knowledge needed to back up your resume.</p>
+                                    <a href="https://www.youtube.com/watch?v=qw--VmL3QHI" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="video-card p-3 rounded-3 h-100">
-                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>PostgreSQL Crash Course</h4>
-                                <p class="small text-muted mb-2"><strong>Channel:</strong> Traversy Media</p>
-                                <p class="small mb-2">Teaches relational database concepts, schema creation, and basic SQL queries. This provides the database knowledge needed to back up your resume.</p>
-                                <a href="https://www.youtube.com/watch?v=qw--VmL3QHI" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    </div>
+
+                    <!-- New Alternative Deep Dive Videos -->
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="badge bg-success mb-2 px-3 py-2">Option 2: Deep Dive Masterclasses (11+ Hours)</span>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="video-card-alt p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>Node.js Full Course for Beginners | Complete All-in-One</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> Dave Gray</p>
+                                    <p class="small mb-2"><strong>Duration:</strong> ~7 Hours<br>Dave Gray doesn't just show you code; he explains exactly how the backend web works, making REST APIs and Express routing incredibly easy to grasp.</p>
+                                    <a href="https://www.youtube.com/watch?v=f2EqECiTBL8" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="video-card-alt p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>Learn PostgreSQL Tutorial - Full Course</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> freeCodeCamp.org</p>
+                                    <p class="small mb-2"><strong>Duration:</strong> ~4.5 Hours<br>A much slower-paced and thorough guide to relational databases. Ensures you truly understand tables and primary keys before connecting them to your apps.</p>
+                                    <a href="https://www.youtube.com/watch?v=SpfIwlAYaKk" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -442,11 +512,26 @@
                         Understand server-side rendering vs. client components. Next.js is the exact enterprise framework demanded by Sri Lankan tech companies.
                     </div>
                     
-                    <div class="video-card p-3 rounded-3 mt-3">
-                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js 14 Full Course 2024 | Build and Deploy</h4>
-                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
-                        <p class="small mb-2">Introduces the modern Next.js App Router, Server Components, and client-side rendering. Bridges standard React into an enterprise framework.</p>
-                        <a href="https://www.youtube.com/watch?v=wm5gMKuwSYk" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Original Fast Track Video -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Option 1: Fast Track Crash Course</span>
+                        <div class="video-card p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js 14 Full Course 2024 | Build and Deploy</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                            <p class="small mb-2">Introduces the modern Next.js App Router, Server Components, and client-side rendering. Bridges standard React into an enterprise framework.</p>
+                            <a href="https://www.youtube.com/watch?v=wm5gMKuwSYk" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                        </div>
+                    </div>
+
+                    <!-- New Alternative Deep Dive Video -->
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="badge bg-success mb-2 px-3 py-2">Option 2: Deep Dive Masterclass (4 Hours)</span>
+                        <div class="video-card-alt p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>Next.js 14 Full Course 2024 | Build and Deploy</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> Dave Gray</p>
+                            <p class="small mb-2"><strong>Duration:</strong> ~4 Hours<br>Transitioning from React to Next.js can be confusing. Dave gently breaks down the new App Router, Server Components, and client-side rendering so you actually understand the enterprise architecture.</p>
+                            <a href="https://www.youtube.com/watch?v=843tecwhCEI" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                        </div>
                     </div>
                 </div>
 
@@ -463,11 +548,26 @@
                         Connect a Next.js frontend to the Express/PostgreSQL APIs built in Week 2. Learn to manage state and handle API data fetching securely using Prisma ORM.
                     </div>
                     
-                    <div class="video-card p-3 rounded-3 mt-3">
-                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Learn Prisma In 60 Minutes</h4>
-                        <p class="small text-muted mb-2"><strong>Channel:</strong> Web Dev Simplified</p>
-                        <p class="small mb-2">Prisma is the industry-standard ORM for connecting Node.js or Next.js to PostgreSQL. This teaches you how to easily write database queries using JavaScript instead of raw SQL strings.</p>
-                        <a href="https://www.youtube.com/watch?v=RebA5J-rlwg" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Original Fast Track Video -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Option 1: Fast Track Crash Course (1 Hour)</span>
+                        <div class="video-card p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Learn Prisma In 60 Minutes</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> Web Dev Simplified</p>
+                            <p class="small mb-2">Prisma is the industry-standard ORM for connecting Node.js or Next.js to PostgreSQL. This teaches you how to easily write database queries using JavaScript instead of raw SQL strings.</p>
+                            <a href="https://www.youtube.com/watch?v=RebA5J-rlwg" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                        </div>
+                    </div>
+
+                    <!-- New Alternative Deep Dive Video -->
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="badge bg-success mb-2 px-3 py-2">Option 2: Deep Dive Masterclass (1.5 Hours)</span>
+                        <div class="video-card-alt p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>Prisma ORM Crash Course for Beginners</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> PedroTech</p>
+                            <p class="small mb-2"><strong>Duration:</strong> ~1.5 Hours<br>Pedro's teaching style is notoriously beginner-friendly and eager. He explains exactly how to wire Node.js/Next.js to PostgreSQL seamlessly.</p>
+                            <a href="https://www.youtube.com/watch?v=FhTq2F7_zT4" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -491,11 +591,26 @@
                         <strong>Features:</strong> User Authentication (JWT), Relational schema (Users, Products, Orders), Data tables & Charts fetching from Node.js backend.
                     </div>
                     
-                    <div class="video-card p-3 rounded-3 mt-3">
-                        <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Build and Deploy a React Admin Dashboard App With Theming, Tables, Charts</h4>
-                        <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
-                        <p class="small mb-2">Provides the exact UI blueprint for the B2B SaaS dashboard project. Follow this to build the frontend visuals, but <strong>connect it to your custom Express/PostgreSQL backend</strong> instead of using the tutorial's dummy data.</p>
-                        <a href="https://www.youtube.com/watch?v=jx5hdo50a2M" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Original Fast Track Video -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Option 1: Fast Track Portfolio Project</span>
+                        <div class="video-card p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Build and Deploy a React Admin Dashboard App With Theming, Tables, Charts</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> JavaScript Mastery</p>
+                            <p class="small mb-2">Provides the exact UI blueprint for the B2B SaaS dashboard project. Follow this to build the frontend visuals, but <strong>connect it to your custom Express/PostgreSQL backend</strong> instead of using the tutorial's dummy data.</p>
+                            <a href="https://www.youtube.com/watch?v=jx5hdo50a2M" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                        </div>
+                    </div>
+
+                    <!-- New Alternative Deep Dive Video -->
+                    <div class="mt-4 pt-3 border-top">
+                        <span class="badge bg-success mb-2 px-3 py-2">Option 2: Deep Dive Masterclass (10.5 Hours)</span>
+                        <div class="video-card-alt p-3 rounded-3">
+                            <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-success me-2"></i>Build an E-Commerce Admin Dashboard (Next.js 14, Prisma, PostgreSQL)</h4>
+                            <p class="small text-muted mb-2"><strong>Channel:</strong> Code With Antonio</p>
+                            <p class="small mb-2"><strong>Duration:</strong> ~10.5 Hours<br>The ultimate PERN-stack masterclass. Antonio is incredibly patient and writes every single line of code with you. This wires Next.js, Prisma, and PostgreSQL together into a true Solo Portfolio masterpiece that guarantees interviews.</p>
+                            <a href="https://www.youtube.com/watch?v=5miHyP6lExg" target="_blank" class="yt-link-alt"><i class="bi bi-box-arrow-up-right"></i> Watch Masterclass</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -518,21 +633,25 @@
                         Deploy the PostgreSQL database to Supabase. Deploy the Next.js app to Vercel. <strong>CV Update:</strong> Remove older, less relevant projects and place this Solo Full-Stack Dashboard at the very top.
                     </div>
                     
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-6">
-                            <div class="video-card p-3 rounded-3 h-100">
-                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Host a PostgreSQL Database for FREE with Supabase</h4>
-                                <p class="small text-muted mb-2"><strong>Channel:</strong> Code With Antonio</p>
-                                <p class="small mb-2">A quick guide on how to migrate your local PostgreSQL database to a free cloud host (Supabase) so your live application can persist data securely.</p>
-                                <a href="https://www.youtube.com/watch?v=7uKQBl9uZ00" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                    <!-- Deployment Videos (Already excellent, kept intact) -->
+                    <div class="mt-4">
+                        <span class="badge bg-secondary mb-2 px-3 py-2">Deployment Guides</span>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="video-card p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Host a PostgreSQL Database for FREE with Supabase</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> Code With Antonio</p>
+                                    <p class="small mb-2">A quick guide on how to migrate your local PostgreSQL database to a free cloud host (Supabase) so your live application can persist data securely.</p>
+                                    <a href="https://www.youtube.com/watch?v=7uKQBl9uZ00" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="video-card p-3 rounded-3 h-100">
-                                <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js Deployment to Vercel</h4>
-                                <p class="small text-muted mb-2"><strong>Channel:</strong> Vercel</p>
-                                <p class="small mb-2">The official, fastest way to deploy your Next.js frontend to a live, shareable URL. This gives you the final production link for your CV.</p>
-                                <a href="https://www.youtube.com/watch?v=2HBIzEx6IZA" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                            <div class="col-md-6">
+                                <div class="video-card p-3 rounded-3 h-100">
+                                    <h4 class="h6 fw-bold mb-2"><i class="bi bi-youtube text-danger me-2"></i>Next.js Deployment to Vercel</h4>
+                                    <p class="small text-muted mb-2"><strong>Channel:</strong> Vercel</p>
+                                    <p class="small mb-2">The official, fastest way to deploy your Next.js frontend to a live, shareable URL. This gives you the final production link for your CV.</p>
+                                    <a href="https://www.youtube.com/watch?v=2HBIzEx6IZA" target="_blank" class="yt-link"><i class="bi bi-box-arrow-up-right"></i> Watch Tutorial</a>
+                                </div>
                             </div>
                         </div>
                     </div>
